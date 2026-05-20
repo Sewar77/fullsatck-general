@@ -1,11 +1,11 @@
 import express from "express"
-import { registerController } from "../controller/auth.Controller.js"
 import { validate } from "../middleware/validate.Middleware.js"
-import registerSchema from "../validation/auth.Validation.js"
-
+import { registerSchema, loginSchema } from "../validation/auth.Validation.js"
+import { loginController, registerController } from "../controller/auth.Controller.js"
 const route = express.Router()
 
 route.post('/auth/register', validate(registerSchema), registerController)
+route.post('/auth/login', validate(loginSchema), loginController)
 
 
 export default route

@@ -33,4 +33,23 @@ const registerSchema = Joi.object({
     })
 })
 
-export default registerSchema
+
+const loginSchema = Joi.object({
+    email: Joi.string().email().required().messages({
+        "string.base": "Email should be valid string",
+        "string.email": "Email must be valid",
+        "string.empty": "Email cannot be empty",
+        "any.required": "Email Cant by empty"
+    }),
+    password: Joi.string().required().pattern(passwordRegex).min(8).max(100).messages({
+        'string.base': 'Password must be a string',
+        'string.empty': 'Password cannot be empty',
+        'string.min': 'Password must be at least 8 charecters',
+        'string.max': 'Password must be at most 100 charecter',
+        'string.pattern.base': 'Password must contain at least 8 characters, including uppercase, lowercase, number, and special character',
+        'any.required': 'Password is required'
+    }),
+})
+
+export { registerSchema, loginSchema }
+
