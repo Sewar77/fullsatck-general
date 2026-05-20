@@ -5,3 +5,6 @@ export const register = async (name, email, hashed_password) => {
         values($1, $2, $3) returning * `, [name, email, hashed_password])
     return result.rows[0]
 }
+export const saveRereshTokens = async (id, token) => {
+    await pool.query(`update users set refreshTokens=$1 where id = $2`, [token, id])
+}
