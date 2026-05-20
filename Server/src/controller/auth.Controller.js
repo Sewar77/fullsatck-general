@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { register, saveRereshTokens } from "../model/auth.Model.js";
-import { getUserByEmail } from "../model/user.Model.js";
+import { getUserByEmail, getUserById } from "../model/user.Model.js";
 import bcrypt from "bcrypt";
 import cookie from "cookie-parser"
 import { generateAccessTokens, generateRefreshTokens } from "../utils/tokens.Utils.js";
@@ -116,6 +116,6 @@ export const refreshToken = async (req, res) => {
         })
         return res.json({ accessToken })
     } catch (error) {
-
+        return res.status(500).json({ message: "internal server error" })
     }
 }
